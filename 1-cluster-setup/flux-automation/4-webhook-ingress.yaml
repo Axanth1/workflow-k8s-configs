@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flux-webhook-receiver
+  namespace: flux-system
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - gitops.axanth.gr
+    secretName: flux-webhook-tls
+  rules:
+  - host: gitops.axanth.gr
+    http:
+      paths:
+      - path: /hook/dockerhub-receiver 
+        pathType: Prefix
+        backend:
+          service:
+            name: webhook-receiver
+            port:
+              number: 80

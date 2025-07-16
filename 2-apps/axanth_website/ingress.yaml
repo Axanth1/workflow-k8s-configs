@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: axanth-website-ingress
+  namespace: axanth-website-ns
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - axanth.gr
+      - www.axanth.gr
+    secretName: axanth-gr-tls
+  rules:
+  - host: www.axanth.gr
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: axanth-website-service
+            port:
+              number: 80

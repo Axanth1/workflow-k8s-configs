@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: axanth-website-deployment
+  namespace: axanth-website-ns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: axanth-website
+  template:
+    metadata:
+      labels:
+        app: axanth-website
+    spec:
+      containers:
+      - name: axanth-website-container
+        image: axanth/axanth-website:latest
+        ports:
+        - containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: axanth-website-service
+  namespace: axanth-website-ns
+spec:
+  selector:
+    app: axanth-website
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
