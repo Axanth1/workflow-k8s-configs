@@ -4,7 +4,7 @@ metadata:
   name: axanth-website-deployment
   namespace: axanth-website-ns
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: axanth-website
