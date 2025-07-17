@@ -1,31 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  # This is the name that will appear in the Argo CD UI
   name: axanth-website
-  # Argo CD Applications must be in the argocd namespace
   namespace: argocd
 spec:
-  # The project this application belongs to
   project: default
-
-  # Source of the application manifests
   source:
     repoURL: https://github.com/axanth1/workflow-k8s-configs.git
     targetRevision: HEAD
-    # The path within the repo where the app's manifests are
     path: 2-apps/axanth_website
-
-  # Destination where the app will be deployed
   destination:
     server: https://kubernetes.default.svc
-    # The namespace to deploy the application into
     namespace: axanth-website-ns
-
-  # Sync policy for automatic deployment
   syncPolicy:
     automated:
-      prune: true    # Deletes resources that are no longer in Git
-      selfHeal: true # Automatically corrects any manual changes in the cluster
+      prune: true
+      selfHeal: true
     syncOptions:
-    - CreateNamespace=true # Automatically create the namespace if it doesn't exist
+    - CreateNamespace=true
