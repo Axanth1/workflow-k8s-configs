@@ -14,23 +14,23 @@ spec:
         app: axanth-website
     spec:
       containers:
-        - name: axanth-website-container
-          # This is the only line that has changed
-          image: docker.io/axanth/axanth-website:f410aeebeab7058879164ca2633e5a1455a06a15
-          ports:
-            - containerPort: 3000
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 3000
-            initialDelaySeconds: 15
-            periodSeconds: 20
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 3000
-            initialDelaySeconds: 5
-            periodSeconds: 10
+      - name: axanth-website-container
+        # This is the only line that has changed
+        image: docker.io/axanth/axanth-website:1dceeb959520a40269908c3aaad2e0f23699928e
+        ports:
+        - containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
 ---
 apiVersion: v1
 kind: Service
@@ -44,7 +44,3 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 3000
-  template:
-    spec:
-      containers:
-        - image: docker.io/axanth/axanth-website:f410aeebeab7058879164ca2633e5a1455a06a15
