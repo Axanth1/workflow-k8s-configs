@@ -1,0 +1,13 @@
+# 2-apps/axanth_website/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: axanth-website-service
+  namespace: axanth-website-ns
+spec:
+  selector:
+    app: axanth-website
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

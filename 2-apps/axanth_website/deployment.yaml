@@ -1,3 +1,4 @@
+# 2-apps/axanth_website/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,37 +15,19 @@ spec:
         app: axanth-website
     spec:
       containers:
-        - name: axanth-website-container
-          # This is the only line that has changed
-          image: docker.io/axanth/axanth-website:d08b8cde90ecd17295d218a4b6850b399abe6701
-          ports:
-            - containerPort: 3000
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 3000
-            initialDelaySeconds: 15
-            periodSeconds: 20
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 3000
-            initialDelaySeconds: 5
-            periodSeconds: 10
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: axanth-website-service
-  namespace: axanth-website-ns
-spec:
-  selector:
-    app: axanth-website
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 3000
-  template:
-    spec:
-      containers:
-        - image: docker.io/axanth/axanth-website:d08b8cde90ecd17295d218a4b6850b399abe6701
+      - name: axanth-website-container
+        image: docker.io/axanth/axanth-website:latest # Start with a placeholder tag
+        ports:
+        - containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
