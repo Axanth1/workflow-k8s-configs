@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: axanth-website-container
-          image: docker.io/axanth/axanth-website:502d8ac2120abfb9d894624c3df161b2ae5d18d8 # Start with a placeholder tag
+          image: docker.io/axanth/axanth-website:b568fbf05819861e7c2cdc53115771f07428ca5a # Start with a placeholder tag
           ports:
             - containerPort: 3000
           livenessProbe:
