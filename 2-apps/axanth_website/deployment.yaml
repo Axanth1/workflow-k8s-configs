@@ -15,10 +15,9 @@ spec:
     spec:
       containers:
         - name: axanth-website-container
-          image: docker.io/axanth/axanth-website:9836023cb5b6bdb8f92bc75d66112e30284f9a6c
+          image: docker.io/axanth/axanth-website:79112559d689d9bf318b6e8a478600a80f043267
           ports:
             - containerPort: 3000
-          
           # --- ADD THIS SECTION ---
           env:
             - name: RESEND_API_KEY
