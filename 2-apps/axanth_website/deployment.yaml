@@ -1,4 +1,3 @@
-# 2-apps/axanth_website/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,9 +15,19 @@ spec:
     spec:
       containers:
         - name: axanth-website-container
-          image: docker.io/axanth/axanth-website:9836023cb5b6bdb8f92bc75d66112e30284f9a6c # Start with a placeholder tag
+          image: docker.io/axanth/axanth-website:9836023cb5b6bdb8f92bc75d66112e30284f9a6c
           ports:
             - containerPort: 3000
+          
+          # --- ADD THIS SECTION ---
+          env:
+            - name: RESEND_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: resend-secret
+                  key: RESEND_API_KEY
+          # ------------------------
+
           livenessProbe:
             httpGet:
               path: /
