@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: axanth-website-container
-          image: docker.io/axanth/axanth-website:33dd1e883ebb1c5807a22fba504739a516e8dd57
+          image: docker.io/axanth/axanth-website:e7411b54a21252407efae732fb5fd506503749bc
           ports:
             - containerPort: 3000
           # --- ADD THIS SECTION ---
