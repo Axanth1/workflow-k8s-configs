@@ -13,10 +13,8 @@ spec:
       labels:
         app: gtm-server
     spec:
-      # --- ADD THIS SECTION ---
       imagePullSecrets:
       - name: gcr-cred
-      # ------------------------
       containers:
       - name: gtm-server
         image: gcr.io/cloud-tagging-containers/server:2.2.0
@@ -26,7 +24,7 @@ spec:
         - name: CONTAINER_CONFIG
           valueFrom:
             secretKeyRef:
-              name: gtm-server-config
+              name: gtm-server-secrets
               key: CONTAINER_CONFIG
         - name: PORT
           value: "8080"

@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: gtm.axanth.gr # Το subdomain για τον tagging server
+  - host: gtm.axanth.gr
     http:
       paths:
       - path: /
