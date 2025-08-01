@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gtm-server-deployment
+  namespace: axanth-website-ns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gtm-server
+  template:
+    metadata:
+      labels:
+        app: gtm-server
+    spec:
+      containers:
+      - name: gtm-server
+        image: gcr.io/cloud-tagging-containers/server:2.2.0
+        ports:
+        - containerPort: 8080
+        env:
+        - name: CONTAINER_CONFIG
+          valueFrom:
+            secretKeyRef:
+              name: gtm-server-config
+              key: CONTAINER_CONFIG
+        - name: PORT
+          value: "8080"

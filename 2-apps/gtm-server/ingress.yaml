@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gtm-server-ingress
+  namespace: axanth-website-ns
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: gtm.axanth.gr # Το subdomain για τον tagging server
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: gtm-server-service
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - gtm.axanth.gr
+    secretName: gtm-server-tls

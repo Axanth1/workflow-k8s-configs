@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gtm-server
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/axanth1/workflow-k8s-configs.git
+    path: 2-apps/gtm-server
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: axanth-website-ns
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
