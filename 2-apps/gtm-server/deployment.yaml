@@ -13,6 +13,10 @@ spec:
       labels:
         app: gtm-server
     spec:
+      # --- ADD THIS SECTION ---
+      imagePullSecrets:
+      - name: gcr-cred
+      # ------------------------
       containers:
       - name: gtm-server
         image: gcr.io/cloud-tagging-containers/server:2.2.0
